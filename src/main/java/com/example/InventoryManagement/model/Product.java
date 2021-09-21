@@ -2,6 +2,7 @@ package com.example.InventoryManagement.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 public class Product implements Serializable {
@@ -73,6 +74,30 @@ public class Product implements Serializable {
     public void setImageUrl(String imageUrl)
     {
         this.imageUrl = imageUrl;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(id, productName, productPrice, productQuantity, imageUrl);
+    }
+
+    @Override
+    public boolean equals(Object object)
+    {
+        if(this == object)
+            return true;
+        if(object == null)
+            return false;
+        if(getClass() != object.getClass())
+            return false;
+
+        Product product = (Product) object;
+        return Objects.equals(id, product.id) &&
+                Objects.equals(productName, product.productName) &&
+                Objects.equals(productPrice, product.productPrice) &&
+                Objects.equals(productQuantity, product.productQuantity) &&
+                Objects.equals(imageUrl, product.imageUrl);
     }
 
     @Override
